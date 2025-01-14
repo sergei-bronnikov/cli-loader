@@ -47,12 +47,12 @@ func (s *SimpleSpinner) Start() {
 
 func (s *SimpleSpinner) doSpin() {
 	fmt.Print("\033[?25l")
+	defer fmt.Print("\033[?25h")
 	for {
 		for _, char := range s.opts.Spinner {
 			select {
 			case <-s.stopCh:
 				fmt.Print("\033[2K\r", s.opts.Prefix, "Done!", s.opts.Suffix, "\n")
-				fmt.Print("\033[?25h")
 				return
 			default:
 				fmt.Print("\033[2K\r", s.opts.Prefix, char, s.opts.Suffix)

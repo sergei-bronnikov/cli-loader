@@ -47,6 +47,7 @@ func (s *SimpleSpinner) Start() {
 
 func (s *SimpleSpinner) doSpin() {
 	fmt.Print("\033[?25l")
+	defer fmt.Print("")
 	defer fmt.Print("\033[?25h")
 	for {
 		for _, char := range s.opts.Spinner {
